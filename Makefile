@@ -1,11 +1,10 @@
 ARGS=$(filter-out $@, $(MAKECMDGOALS))
 
+init: docker-build docker-up composer-install
 
-up: docker-up
+up: docker-up composer-install
 
 build: docker-build
-
-app: docker-app
 
 docker-up:
 	docker compose up -d --remove-orphans
@@ -13,5 +12,5 @@ docker-up:
 docker-build:
 	docker compose build
 
-docker-app:
-	docker compose exec app ${ARGS}
+composer-install:
+	docker compose exec app composer i
