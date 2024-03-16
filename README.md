@@ -34,3 +34,20 @@ docker compose build \
   && docker compose up -d --remove-orphans \
   && docker compose exec app composer i
 ```
+
+## Использование
+
+### Создание Personal Access Token
+
+Перед использованием команд создайте Personal Access Token с [помощью инструкции](https://docs.github.com/ru/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on).
+
+`TODO: Описать минимальный набор доступов для токена.`
+
+### Проверка пользователей, которые не подписались в ответ
+
+```bash
+docker compose exec app php bin/console github:check:unfollowing \   
+  --token='your github personal access token' \
+  --username='your username'
+```
+
