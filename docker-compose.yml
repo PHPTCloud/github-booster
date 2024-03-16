@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./app/.docker/php
+      dockerfile: ./Dockerfile
+    container_name: ${CONTAINER_PREFIX}_app
+    restart: unless-stopped
+    tty: true
+    networks:
+      - github-booster-default
+    volumes:
+      - ./app:/app:rw
+    depends_on:
+      - postgresql
+      - beanstalkd
+
+  app_supervisord:
+    build:
+      context: ./app/.supervisord
+      dockerfile: ./Dockerfile
+    container_name: ${CONTAINER_PREFIX}_app_supervisord
+    restart: unless-stopped
+    tty: true
+    networks:
+      - github-booster-default
+    volumes:
+      - ./app/.supervisord/conf.d:/etc/supervisor/conf.d:rw
+      - ./app:/app:rw
+    environment:
+      - SUPERVISOR_USERNAME=${SUPERVISOR_USERNAME}
+      - SUPERVISOR_PASSWORD=${SUPERVISOR_PASSWORD}
+      - SUPERVISOR_PORT=${SUPERVISOR_PORT}
+    ports:
+      - ${SUPERVISOR_PORT}:${SUPERVISOR_PORT}
+    depends_on:
+      - postgresql
+      - beanstalkd
+
+  postgresql:
+    build:
+      context: ./postgresql
+      dockerfile: ./Dockerfile
+    container_name: ${CONTAINER_PREFIX}_postgresql
+    restart: unless-stopped
+    tty: true
+    networks:
+      - github-booster-default
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_EXT_PORT}:${POSTGRES_PORT}
+
+  beanstalkd:
+    build:
+      context: ./beanstalkd
+      dockerfile: ./Dockerfile
+    container_name: ${CONTAINER_PREFIX}_beanstalkd
+    restart: unless-stopped
+    tty: true
+    networks:
+      - github-booster-default
+
+networks:
+  github-booster-default:
+    driver: bridge
