@@ -20,5 +20,20 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # LISTENERS
+    App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Listener:
+        tags:
+            - { name: kernel.event_listener, event: App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\HandledEvent }
+
+    App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\UnsubscribeAfterCheckDefinedEventListener:
+        tags:
+            - { name: kernel.event_listener, event: App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHookAction\UnsubscribeAfterCheckDefinedEvent }
+
+    # MESSAGE HANDLERS
+    App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\MessageHandler:
+        tags:
+            - { name: messenger.message_handler }
+
+    App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\MessageHandler:
+        tags:
+            - { name: messenger.message_handler }

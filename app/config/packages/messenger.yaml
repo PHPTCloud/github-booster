@@ -4,14 +4,15 @@ framework:
         # failure_transport: failed
 
         transports:
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            subscribers.actions.hook:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: 1
+                options:
+                    tube_name: 'subscribers.actions.hook'
 
         routing:
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            App\MessageBusSystem\SubscribersFeature\Interfaces\SubscribersFeatureActionHookMessageInterface: 'subscribers.actions.hook'
 
 # when@test:
 #    framework:
