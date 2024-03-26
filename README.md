@@ -46,7 +46,7 @@ docker compose build \
 ### Проверка пользователей, которые не подписались в ответ
 
 ```bash
-docker compose exec app php bin/console github:check:unfollowing \   
+docker compose exec app php bin/console github:subscribers:check-unfollowing \   
   --token='your github personal access token' \
   --username='your username'
 ```

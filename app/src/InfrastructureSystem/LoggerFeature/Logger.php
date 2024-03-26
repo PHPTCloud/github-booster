@@ -15,6 +15,18 @@ class Logger implements LoggerInterface
 
     public function debug(string $message, array $context): void
     {
-        $this->logger->debug(self::PREFIX . $message, $context);
+        $this->logger->debug($this->prepareMessage($message), $this->prepareContext($context));
+    }
+
+    private function prepareMessage(string $message): string
+    {
+        return self::PREFIX . $message;
+    }
+
+    private function prepareContext(array $context): array
+    {
+        return array_merge([
+            '__time' => microtime(true),
+        ],$context);
     }
 }

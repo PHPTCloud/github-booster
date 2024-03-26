@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'github:check:unfollowing',
+    name: 'github:subscribers:check-unfollowing',
     description: 'Выводит пользователей, которые не подписались на аккаунт после подписки на них.'
 )]
 class GithubCheckUnfollowingCommand extends Command

@@ -40,4 +40,16 @@ interface SubscribersManagerInterface
     ): void;
 
     public function unsubscribe(UserInterface $user, string $targetUserToken): void;
+
+    /**
+     * Метод для синхронизации подписчиков. Берет абсолютно всех подписчиков на данный момент и сохраняет в бд.
+     * Синхронизация нужна, чтобы была возможность выполнять меньшее количество запросов в GitHub API и не пре-
+     * вышать rate limit.
+     *
+     * @param string $targetUserToken - токен для аутентификации целевого пользователя (для которого проводим проверку).
+     * @param string $targetUsername  - логин целевого пользователя.
+     *
+     * @return void
+     */
+    public function syncSubscribers(string $targetUserToken, string $targetUsername): void;
 }

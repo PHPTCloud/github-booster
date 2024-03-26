@@ -42,6 +42,8 @@ class SubscribersManager implements GithubSubscribersManagerInterface
             ],
         ]);
 
+        $this->loggingRateLimitHeaders($response->getHeaders());
+
         $items = $this->deserializer->deserializeAsArray(
             $response->getBody()->getContents(),
             Subscription::class,
@@ -49,7 +51,7 @@ class SubscribersManager implements GithubSubscribersManagerInterface
         );
 
         if (empty($items)) {
-            throw new OutOfRangeException('Список подписок пуст.');
+            throw new OutOfRangeException('Список подписчиков пуст.');
         }
 
         return $items;
@@ -69,6 +71,8 @@ class SubscribersManager implements GithubSubscribersManagerInterface
                     'Authorization' => 'Bearer ' . $token,
                 ],
             ]);
+
+            $this->loggingRateLimitHeaders($response->getHeaders());
         } catch (RequestException $exception) {
             if ($exception->getResponse()->getStatusCode() === 404) {
                 $this->logger->debug('Вызван метод проверки подписки несуществующего пользователя.', [
@@ -97,12 +101,7 @@ class SubscribersManager implements GithubSubscribersManagerInterface
                 ],
             ]);
 
-            $this->logger->debug('Попытка вызова метода отписки от пользователя.', [
-                'username' => $username,
-                'class' => __CLASS__,
-                'method' => __METHOD__,
-                'line' => __LINE__,
-            ]);
+            $this->loggingRateLimitHeaders($response->getHeaders());
         } catch (RequestException $exception) {
             if ($exception->getResponse()->getStatusCode() === 304) {
                 $this->logger->debug('Вызван метод отписки от пользователя, на которого нет подписки.', [
@@ -117,5 +116,16 @@ class SubscribersManager implements GithubSubscribersManagerInterface
         }
 
         return $response->getStatusCode() === 204;
+    }
+
+    private function loggingRateLimitHeaders(array $headers): void
+    {
+        $this->logger->debug('Значения Rate Limit.', [
+            'Link' => $headers['Link'][0] ?? null,
+            'X-RateLimit-Limit' => $headers['X-RateLimit-Limit'][0],
+            'X-RateLimit-Remaining' => $headers['X-RateLimit-Remaining'][0],
+            'X-RateLimit-Used' => $headers['X-RateLimit-Used'][0],
+            'X-RateLimit-Reset' => (new \DateTime())->setTimestamp((int) $headers['X-RateLimit-Reset'][0])->format('Y-m-d H:i:s'),
+        ]);
     }
 }
