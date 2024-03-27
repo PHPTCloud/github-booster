@@ -51,7 +51,7 @@ class SubscribersManager implements GithubSubscribersManagerInterface
         );
 
         if (empty($items)) {
-            throw new OutOfRangeException('Список подписчиков пуст.');
+            throw new OutOfRangeException('Список подписок пуст.');
         }
 
         return $items;

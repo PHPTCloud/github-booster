@@ -43,7 +43,9 @@ docker compose build \
 
 `TODO: Описать минимальный набор доступов для токена.`
 
-### Проверка пользователей, которые не подписались в ответ
+### github:subscribers:check-unfollowing
+
+Проверка пользователей, которые не подписались в ответ
 
 ```bash
 docker compose exec app php bin/console github:subscribers:check-unfollowing \   
@@ -51,3 +53,26 @@ docker compose exec app php bin/console github:subscribers:check-unfollowing \
   --username='your username'
 ```
 
+### github:subscribers:sync
+
+Синхронизирует список подписчиков целевого пользователя.
+
+(!) ВАЖНО: метод перед работой очищает таблицу базы данных, чтобы данные всегда были актуальны.
+
+```bash
+docker compose exec app php bin/console github:subscriptions:sync \ 
+--token='<your personal token>' \
+--username='<your user name>'
+```
+
+### github:subscriptions:sync
+
+Синхронизирует список подписок целевого пользователя.
+
+(!) ВАЖНО: метод перед работой очищает таблицу базы данных, чтобы данные всегда были актуальны.
+
+```bash
+docker compose exec app php bin/console github:subscriptions:sync \ 
+--token='<your personal token>' \
+--username='<your user name>'
+```
