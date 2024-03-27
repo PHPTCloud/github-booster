@@ -7,6 +7,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAct
 use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionMessageFactoryInterface;
 use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionMessageInterface;
 
+/**
+ * @deprecated
+ */
 class MessageFactory implements CheckUnsubscribedHandledHookActionMessageFactoryInterface
 {
     public function create(CheckUnsubscribedHandledHookActionCommandInterface $command,): CheckUnsubscribedHandledHookActionMessageInterface

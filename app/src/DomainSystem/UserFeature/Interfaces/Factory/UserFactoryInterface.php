@@ -5,6 +5,9 @@ namespace App\DomainSystem\UserFeature\Interfaces\Factory;
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 interface UserFactoryInterface
 {
     public function create(string $login, ?bool $subscribed = null): UserInterface;

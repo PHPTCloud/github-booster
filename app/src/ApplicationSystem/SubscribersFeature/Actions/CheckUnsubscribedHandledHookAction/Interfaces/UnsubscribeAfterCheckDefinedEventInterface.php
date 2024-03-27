@@ -6,6 +6,9 @@ namespace App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHand
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 use App\InfrastructureSystem\EventDispatcherFeature\EventInterface;
 
+/**
+ * @deprecated
+ */
 interface UnsubscribeAfterCheckDefinedEventInterface extends EventInterface
 {
     public function getTargetUserToken(): string;

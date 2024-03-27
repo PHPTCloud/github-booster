@@ -7,6 +7,9 @@ use App\ApplicationSystem\SubscribersFeature\Enums\ActionsEnum;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandValidatorInterface;
 
+/**
+ * @deprecated
+ */
 class CommandValidator implements CheckUnsubscribedHandledHookActionCommandValidatorInterface
 {
     public function validate(CheckUnsubscribedHandledHookActionCommandInterface $command): ?array

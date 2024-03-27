@@ -5,6 +5,7 @@ namespace App\ApplicationSystem\SubscribersFeature\Manager;
 
 use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionHandlerInterface;
+use App\ApplicationSystem\SubscribersFeature\Actions\RemoveAllSubscribersAction\Interfaces\RemoveAllSubscribersHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\SyncSubscribersAction\Interfaces\SyncSubscribersActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\SyncSubscriptionsAction\Interfaces\SyncSubscriptionsActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\UnsubscribeAction\Interfaces\UnsubscribeActionHandlerInterface;
@@ -21,8 +22,12 @@ class SubscribersManager implements SubscribersManagerInterface
         private readonly CheckUnsubscribedHandledHookActionHandlerInterface $checkUnsubscribedHandledHookActionHandler,
         private readonly UnsubscribeActionHandlerInterface $unsubscribeActionHandler,
         private readonly SyncSubscribersActionHandlerInterface $syncSubscribersActionHandler,
+        private readonly RemoveAllSubscribersHandlerInterface $removeAllSubscribersHandler,
     ) {}
 
+    /**
+     * @deprecated
+     */
     public function checkUnsubscribed(
         string $targetUserToken,
         string $targetUsername,
@@ -46,6 +51,9 @@ class SubscribersManager implements SubscribersManagerInterface
         return $response;
     }
 
+    /**
+     * @deprecated
+     */
     public function handleCheckUnsubscribedHandledHook(
         array $users,
         string $targetUserToken,
@@ -67,6 +75,9 @@ class SubscribersManager implements SubscribersManagerInterface
         ]);
     }
 
+    /**
+     * @deprecated
+     */
     public function unsubscribe(UserInterface $user, string $targetUserToken): void
     {
         $this->logger->debug(sprintf('%s method started', __METHOD__), [
@@ -87,12 +98,47 @@ class SubscribersManager implements SubscribersManagerInterface
     public function syncSubscribers(string $targetUserToken, string $targetUsername): void
     {
         $this->logger->debug(sprintf('%s method started', __METHOD__), [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->logger->debug('Удаление списка подписчиков целевого пользователя из БД.', [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->removeAllSubscribersHandler->handle($targetUsername);
+
+        $this->logger->debug('Получение нового списка подписчиков целевого пользователя и сохранение его в БД.', [
+            'arguments' => func_get_args(),
             'class' => __CLASS__,
             'method' => __METHOD__,
             'line' => __LINE__,
         ]);
 
         $this->syncSubscribersActionHandler->handle($targetUserToken, $targetUsername);
+
+        $this->logger->debug(sprintf('%s method ended', __METHOD__), [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+    }
+
+    public function removeAllSubscribers(string $targetUsername): void
+    {
+        $this->logger->debug(sprintf('%s method started', __METHOD__), [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->removeAllSubscribersHandler->handle($targetUsername);
 
         $this->logger->debug(sprintf('%s method ended', __METHOD__), [
             'class' => __CLASS__,

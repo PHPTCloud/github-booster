@@ -6,6 +6,9 @@ namespace App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAc
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandInterface;
 use App\MessageBusSystem\SubscribersFeature\Interfaces\SubscribersFeatureActionHookMessageInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedHandledHookActionMessageInterface extends SubscribersFeatureActionHookMessageInterface
 {
     public function getCommand(): CheckUnsubscribedHandledHookActionCommandInterface;

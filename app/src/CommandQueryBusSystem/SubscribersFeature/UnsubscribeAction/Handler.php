@@ -9,6 +9,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\Un
 use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionCommandValidatorInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionHandlerInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements UnsubscribeActionHandlerInterface
 {
     public function __construct(

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\InfrastructureSystem\GithubFollowersFeature\Manager;
 
+use App\InfrastructureSystem\GithubFollowersFeature\DataObject\Subscriber;
 use App\InfrastructureSystem\GithubFollowersFeature\DataObject\Subscription;
 use App\InfrastructureSystem\GithubFollowersFeature\Interfaces\GithubSubscribersManagerInterface;
 use App\InfrastructureSystem\InternalFollowersFeatureApi\Exception\OutOfRangeException;
@@ -127,5 +128,32 @@ class SubscribersManager implements GithubSubscribersManagerInterface
             'X-RateLimit-Used' => $headers['X-RateLimit-Used'][0],
             'X-RateLimit-Reset' => (new \DateTime())->setTimestamp((int) $headers['X-RateLimit-Reset'][0])->format('Y-m-d H:i:s'),
         ]);
+    }
+
+    public function getSubscribers(string $token, int $page = 1, int $limit = 30): array
+    {
+        $response = $this->client->get('/user/followers', [
+            RequestOptions::HEADERS => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            RequestOptions::QUERY => [
+                'page' => $page,
+                'per_page' => $limit,
+            ],
+        ]);
+
+        $this->loggingRateLimitHeaders($response->getHeaders());
+
+        $items = $this->deserializer->deserializeAsArray(
+            $response->getBody()->getContents(),
+            Subscriber::class,
+            DeserializerInterface::JSON_FORMAT,
+        );
+
+        if (empty($items)) {
+            throw new OutOfRangeException('Список подписок пуст.');
+        }
+
+        return $items;
     }
 }

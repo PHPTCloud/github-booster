@@ -5,6 +5,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledH
 
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionResponseInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedHandledHookActionCommandFactoryInterface
 {
     public function create(

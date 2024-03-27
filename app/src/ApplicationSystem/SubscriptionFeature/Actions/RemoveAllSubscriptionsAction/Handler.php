@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptions;
+namespace App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptionsAction;
 
-use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptions\Interfaces\RemoveAllSubscriptionsHandlerInterface;
+use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptionsAction\Interfaces\RemoveAllSubscriptionsHandlerInterface;
 use App\DomainSystem\SubscriptionFeature\Storage\SubscriptionStorageInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
 

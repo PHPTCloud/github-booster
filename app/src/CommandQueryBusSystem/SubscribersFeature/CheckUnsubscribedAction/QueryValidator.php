@@ -7,6 +7,9 @@ use App\ApplicationSystem\SubscribersFeature\Enums\ActionsEnum;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionQueryInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionQueryValidatorInterface;
 
+/**
+ * @deprecated
+ */
 class QueryValidator implements CheckUnsubscribedActionQueryValidatorInterface
 {
     public function validate(CheckUnsubscribedActionQueryInterface $query): ?array

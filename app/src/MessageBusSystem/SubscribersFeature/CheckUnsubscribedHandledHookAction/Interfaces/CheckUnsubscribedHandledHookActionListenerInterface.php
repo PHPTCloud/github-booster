@@ -5,6 +5,9 @@ namespace App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAc
 
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionHandledEventInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedHandledHookActionListenerInterface
 {
     public function __invoke(CheckUnsubscribedActionHandledEventInterface $event): void;

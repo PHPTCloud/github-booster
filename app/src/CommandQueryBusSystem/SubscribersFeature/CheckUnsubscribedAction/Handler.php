@@ -12,6 +12,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfa
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionResponseInterface;
 use App\InfrastructureSystem\EventDispatcherFeature\EventDispatcherInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements CheckUnsubscribedActionHandlerInterface
 {
     public function __construct(

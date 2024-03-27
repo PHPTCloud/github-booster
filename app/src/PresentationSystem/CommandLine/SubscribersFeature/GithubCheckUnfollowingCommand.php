@@ -14,6 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @deprecated
+ */
 #[AsCommand(
     name: 'github:subscribers:check-unfollowing',
     description: 'Выводит пользователей, которые не подписались на аккаунт после подписки на них.'
@@ -74,6 +77,8 @@ class GithubCheckUnfollowingCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        throw new \RuntimeException('Deprecated port blocked.');
+
         $targetUserToken = $input->getOption(self::GITHUB_PERSONAL_TOKEN_OPTION);
         $targetUsername = $input->getOption(self::GITHUB_TARGET_USERNAME_OPTION);
         $actions = $input->getOption(self::ACTION_STRATEGY_OPTION);

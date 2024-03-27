@@ -9,6 +9,9 @@ use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
 use App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionMessageHandlerInterface;
 use App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionMessageInterface;
 
+/**
+ * @deprecated
+ */
 class MessageHandler implements UnsubscribeActionMessageHandlerInterface
 {
     public function __construct(

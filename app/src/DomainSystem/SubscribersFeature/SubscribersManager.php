@@ -16,4 +16,9 @@ class SubscribersManager implements SubscribersManagerInterface
     {
         $this->subscriberStorage->save($subscriber, $flush);
     }
+
+    public function removeByTargetUsername(string $targetUsername): void
+    {
+        $this->subscriberStorage->removeBy(['targetUsername' => $targetUsername]);
+    }
 }

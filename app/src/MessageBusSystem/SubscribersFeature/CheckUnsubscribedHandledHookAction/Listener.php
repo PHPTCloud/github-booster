@@ -11,6 +11,7 @@ use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\I
 
 /**
  * Не нужно использовать AsEventListener. Настройку слушателя делаем через services.yaml.
+ * @deprecated
  */
 class Listener implements CheckUnsubscribedHandledHookActionListenerInterface
 {

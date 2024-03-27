@@ -5,6 +5,9 @@ namespace App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedActi
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedActionHandlerInterface
 {
     /**

@@ -24,10 +24,13 @@ class Handler implements SyncSubscribersActionHandlerInterface
         $page = 1;
         $limit = 500;
 
-        // Используем true, так как когда дойдем до конца списка выйдем из цикла через исклюение OutOfRangeException.
+        /**
+         * Используем true, так как когда дойдем до конца списка
+         * выйдем из цикла через исключение OutOfRangeException.
+         */
         while (true) {
             try {
-                $subscribers = $this->internalSubscribersManager->getSubscriptions($targetUserToken, $page, $limit);
+                $subscribers = $this->internalSubscribersManager->getSubscribers($targetUserToken, $page, $limit);
             } catch (OutOfRangeException $exception) {
                 $this->logger->debug($exception->getMessage(), [
                     'username' => $targetUsername,

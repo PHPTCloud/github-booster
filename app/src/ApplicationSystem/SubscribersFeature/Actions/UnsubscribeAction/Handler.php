@@ -7,6 +7,9 @@ use App\ApplicationSystem\SubscribersFeature\Actions\UnsubscribeAction\Interface
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 use App\InfrastructureSystem\InternalFollowersFeatureApi\Manager\InternalSubscribersManagerInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements UnsubscribeActionHandlerInterface
 {
     public function __construct(

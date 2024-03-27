@@ -5,6 +5,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\I
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedActionResponseFactoryInterface
 {
     /**

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\InfrastructureSystem\InternalFollowersFeatureApi\Manager;
 
+use App\InfrastructureSystem\InternalFollowersFeatureApi\DataObject\SubscriberInterface;
 use App\InfrastructureSystem\InternalFollowersFeatureApi\DataObject\SubscriptionInterface;
 use App\InfrastructureSystem\InternalFollowersFeatureApi\Exception\OutOfRangeException;
 
@@ -17,4 +18,9 @@ interface InternalSubscribersManagerInterface
     public function subscriptionCheck(string $token, string $targetUsername, string $username): bool;
 
     public function unsubscribe(string $token, string $username): bool;
+
+    /**
+     * @return SubscriberInterface[]
+     */
+    public function getSubscribers(string $token, int $page = 1, int $limit = 30): array;
 }

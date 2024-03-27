@@ -5,6 +5,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfa
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 interface UnsubscribeActionCommandInterface
 {
     public function getUser(): UserInterface;
