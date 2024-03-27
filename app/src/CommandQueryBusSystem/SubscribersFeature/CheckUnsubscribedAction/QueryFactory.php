@@ -6,6 +6,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionQueryFactoryInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionQueryInterface;
 
+/**
+ * @deprecated
+ */
 class QueryFactory implements CheckUnsubscribedActionQueryFactoryInterface
 {
     public function create(

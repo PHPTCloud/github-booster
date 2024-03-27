@@ -7,6 +7,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAct
 use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionMessageHandlerInterface;
 use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionMessageInterface;
 
+/**
+ * @deprecated
+ */
 class MessageHandler implements CheckUnsubscribedHandledHookActionMessageHandlerInterface
 {
     public function __construct(

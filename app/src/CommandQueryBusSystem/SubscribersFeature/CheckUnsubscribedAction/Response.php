@@ -5,6 +5,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction;
 
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionResponseInterface;
 
+/**
+ * @deprecated
+ */
 class Response implements CheckUnsubscribedActionResponseInterface
 {
     public function __construct(

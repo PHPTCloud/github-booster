@@ -6,6 +6,9 @@ namespace App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAc
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandInterface;
 use App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionMessageInterface;
 
+/**
+ * @deprecated
+ */
 class Message implements CheckUnsubscribedHandledHookActionMessageInterface
 {
     public function __construct(

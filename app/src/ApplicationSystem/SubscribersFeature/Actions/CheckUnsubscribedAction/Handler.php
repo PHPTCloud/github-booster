@@ -8,6 +8,9 @@ use App\DomainSystem\UserFeature\Interfaces\Factory\UserFactoryInterface;
 use App\InfrastructureSystem\InternalFollowersFeatureApi\Manager\InternalSubscribersManagerInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements CheckUnsubscribedActionHandlerInterface
 {
     public function __construct(

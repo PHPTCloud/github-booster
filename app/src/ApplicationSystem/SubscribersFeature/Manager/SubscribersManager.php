@@ -23,6 +23,9 @@ class SubscribersManager implements SubscribersManagerInterface
         private readonly SyncSubscribersActionHandlerInterface $syncSubscribersActionHandler,
     ) {}
 
+    /**
+     * @deprecated
+     */
     public function checkUnsubscribed(
         string $targetUserToken,
         string $targetUsername,
@@ -46,6 +49,9 @@ class SubscribersManager implements SubscribersManagerInterface
         return $response;
     }
 
+    /**
+     * @deprecated
+     */
     public function handleCheckUnsubscribedHandledHook(
         array $users,
         string $targetUserToken,
@@ -67,6 +73,9 @@ class SubscribersManager implements SubscribersManagerInterface
         ]);
     }
 
+    /**
+     * @deprecated
+     */
     public function unsubscribe(UserInterface $user, string $targetUserToken): void
     {
         $this->logger->debug(sprintf('%s method started', __METHOD__), [

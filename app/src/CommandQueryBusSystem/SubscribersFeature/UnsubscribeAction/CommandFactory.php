@@ -7,6 +7,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\Un
 use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionCommandInterface;
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 class CommandFactory implements UnsubscribeActionCommandFactoryInterface
 {
     public function create(UserInterface $user, string $targetUserToken): UnsubscribeActionCommandInterface

@@ -5,6 +5,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\I
 
 use App\InfrastructureSystem\EventDispatcherFeature\EventInterface;
 
+/**
+ * @deprecated
+ */
 interface CheckUnsubscribedActionHandledEventInterface extends EventInterface
 {
     public function getTargetUserToken(): string;

@@ -8,6 +8,9 @@ use App\InfrastructureSystem\MessageBusFeatureApi\MessageBusInterface;
 use App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionMessageFactoryInterface;
 use App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeAfterCheckDefinedEventListenerInterface;
 
+/**
+ * @deprecated
+ */
 class UnsubscribeAfterCheckDefinedEventListener implements UnsubscribeAfterCheckDefinedEventListenerInterface
 {
     public function __construct(

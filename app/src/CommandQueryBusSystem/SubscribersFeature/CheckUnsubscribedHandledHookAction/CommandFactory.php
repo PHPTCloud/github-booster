@@ -7,6 +7,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfa
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandFactoryInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandInterface;
 
+/**
+ * @deprecated
+ */
 class CommandFactory implements CheckUnsubscribedHandledHookActionCommandFactoryInterface
 {
     public function create(

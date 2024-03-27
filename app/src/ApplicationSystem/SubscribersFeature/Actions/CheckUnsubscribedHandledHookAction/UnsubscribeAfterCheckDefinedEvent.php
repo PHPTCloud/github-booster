@@ -5,6 +5,9 @@ namespace App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHand
 
 use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHookAction\Interfaces\UnsubscribeAfterCheckDefinedEventInterface;
 
+/**
+ * @deprecated
+ */
 class UnsubscribeAfterCheckDefinedEvent implements UnsubscribeAfterCheckDefinedEventInterface
 {
     public function __construct(

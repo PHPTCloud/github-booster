@@ -5,6 +5,9 @@ namespace App\ApplicationSystem\SubscribersFeature\Actions\UnsubscribeAction\Int
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 interface UnsubscribeActionHandlerInterface
 {
     public function handle(UserInterface $user, string $targetUserToken): void;

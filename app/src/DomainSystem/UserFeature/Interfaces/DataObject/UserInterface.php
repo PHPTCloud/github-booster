@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\DomainSystem\UserFeature\Interfaces\DataObject;
 
+/**
+ * @deprecated
+ */
 interface UserInterface
 {
     public function getLogin(): string;

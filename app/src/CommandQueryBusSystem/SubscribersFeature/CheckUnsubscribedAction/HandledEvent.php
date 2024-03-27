@@ -6,6 +6,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionHandledEventInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionResponseInterface;
 
+/**
+ * @deprecated
+ */
 class HandledEvent implements CheckUnsubscribedActionHandledEventInterface
 {
     public function __construct(

@@ -9,6 +9,9 @@ use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAct
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionCommandValidatorInterface;
 use App\CommandQueryBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionHandlerInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements CheckUnsubscribedHandledHookActionHandlerInterface
 {
     public function __construct(

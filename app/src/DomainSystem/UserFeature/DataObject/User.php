@@ -5,6 +5,9 @@ namespace App\DomainSystem\UserFeature\DataObject;
 
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 class User implements UserInterface
 {
     public function __construct(

@@ -7,6 +7,9 @@ use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHoo
 use App\ApplicationSystem\SubscribersFeature\Enums\ActionsEnum;
 use App\InfrastructureSystem\EventDispatcherFeature\EventDispatcherInterface;
 
+/**
+ * @deprecated
+ */
 class Handler implements CheckUnsubscribedHandledHookActionHandlerInterface
 {
     public function __construct(

@@ -6,6 +6,9 @@ namespace App\MessageBusSystem\SubscribersFeature\UnsubscribeAction;
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 use App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionMessageInterface;
 
+/**
+ * @deprecated
+ */
 class Message implements UnsubscribeActionMessageInterface
 {
     public function __construct(

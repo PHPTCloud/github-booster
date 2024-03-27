@@ -6,6 +6,9 @@ namespace App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction;
 use App\CommandQueryBusSystem\SubscribersFeature\UnsubscribeAction\Interfaces\UnsubscribeActionCommandInterface;
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 
+/**
+ * @deprecated
+ */
 class Command implements UnsubscribeActionCommandInterface
 {
     public function __construct(
