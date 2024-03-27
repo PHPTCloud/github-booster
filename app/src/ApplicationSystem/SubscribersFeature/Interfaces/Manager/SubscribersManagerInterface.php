@@ -52,4 +52,13 @@ interface SubscribersManagerInterface
      * @return void
      */
     public function syncSubscribers(string $targetUserToken, string $targetUsername): void;
+
+    /**
+     * Удаление всех подписчиков целевого пользователя. Используется перед синхронизацией.
+     *
+     * @param string $targetUsername - логин целевого пользователя.
+     *
+     * @return void
+     */
+    public function removeAllSubscribers(string $targetUsername): void;
 }

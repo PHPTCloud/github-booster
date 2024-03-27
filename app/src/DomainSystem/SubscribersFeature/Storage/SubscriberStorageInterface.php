@@ -8,4 +8,6 @@ use App\DomainSystem\SubscribersFeature\Entity\SubscriberInterface;
 interface SubscriberStorageInterface
 {
     public function save(SubscriberInterface $subscriber, bool $flush = false): void;
+
+    public function removeBy(array $criteria): void;
 }

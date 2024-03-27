@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\ApplicationSystem\SubscriptionFeature\Manager;
 
-use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptions\Interfaces\RemoveAllSubscriptionsHandlerInterface;
+use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptionsAction\Interfaces\RemoveAllSubscriptionsHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\SyncSubscriptionsAction\Interfaces\SyncSubscriptionsActionHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Interfaces\Manager\SubscriptionManagerInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;

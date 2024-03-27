@@ -8,4 +8,6 @@ use App\DomainSystem\SubscribersFeature\Entity\SubscriberInterface;
 interface SubscribersManagerInterface
 {
     public function saveSubscriber(SubscriberInterface $subscriber, bool $flush = false): void;
+
+    public function removeByTargetUsername(string $targetUsername): void;
 }
