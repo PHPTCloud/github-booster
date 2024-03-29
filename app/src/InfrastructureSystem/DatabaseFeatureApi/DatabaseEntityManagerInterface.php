@@ -8,4 +8,6 @@ interface DatabaseEntityManagerInterface
     public function save(object $entity, bool $flush = false): void;
 
     public function removeBy(string $table, array $criteria): void;
+
+    public function remove(object $entity, bool $flush = false): void;
 }

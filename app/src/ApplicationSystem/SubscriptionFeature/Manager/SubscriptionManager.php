@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\ApplicationSystem\SubscriptionFeature\Manager;
 
+use App\ApplicationSystem\SubscribersFeature\Interfaces\Manager\SubscribersManagerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptionsAction\Interfaces\RemoveAllSubscriptionsHandlerInterface;
+use App\ApplicationSystem\SubscriptionFeature\Actions\SubscriptionsBalancingAction\Interfaces\SubscriptionsBalancingActionHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\SyncSubscriptionsAction\Interfaces\SyncSubscriptionsActionHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Interfaces\Manager\SubscriptionManagerInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
@@ -14,6 +16,8 @@ class SubscriptionManager implements SubscriptionManagerInterface
         private readonly LoggerInterface $logger,
         private readonly SyncSubscriptionsActionHandlerInterface $syncSubscriptionsActionHandler,
         private readonly RemoveAllSubscriptionsHandlerInterface $removeAllSubscriptionsHandler,
+        private readonly SubscriptionsBalancingActionHandlerInterface $subscriptionsBalancingActionHandler,
+        private readonly SubscribersManagerInterface $subscribersManager,
     ) {}
 
     public function syncSubscriptions(string $targetUserToken, string $targetUsername): void
@@ -60,6 +64,46 @@ class SubscriptionManager implements SubscriptionManagerInterface
         ]);
 
         $this->removeAllSubscriptionsHandler->handle($targetUsername);
+
+        $this->logger->debug(sprintf('%s method ended', __METHOD__), [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+    }
+
+    public function subscriptionsBalancing(string $targetUserToken, string $targetUsername): void
+    {
+        $this->logger->debug(sprintf('%s method started', __METHOD__), [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->logger->debug('Старт синхронизации подписок целевого пользователя.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->syncSubscriptions($targetUserToken, $targetUsername);
+
+        $this->logger->debug('Старт синхронизации подписчиков целевого пользователя.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->subscribersManager->syncSubscribers($targetUserToken, $targetUsername);
+
+        $this->logger->debug('Старт балансировки подписок.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->subscriptionsBalancingActionHandler->handle($targetUserToken, $targetUsername);
 
         $this->logger->debug(sprintf('%s method ended', __METHOD__), [
             'class' => __CLASS__,

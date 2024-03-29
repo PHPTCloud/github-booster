@@ -44,4 +44,12 @@ class DoctrineEntityManager implements DoctrineEntityManagerInterface
             'line' => __LINE__,
         ]);
     }
+
+    public function remove(object $entity, bool $flush = false): void
+    {
+        $this->entityManager->remove($entity);
+        if ($flush) {
+            $this->entityManager->flush();
+        }
+    }
 }

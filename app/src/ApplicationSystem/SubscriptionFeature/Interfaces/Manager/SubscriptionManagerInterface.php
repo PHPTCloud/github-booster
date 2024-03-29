@@ -25,4 +25,14 @@ interface SubscriptionManagerInterface
      * @return void
      */
     public function removeSubscriptionsByTargetUsername(string $targetUsername): void;
+
+    /**
+     * Метод для отписки от пользователей, которые не подписались на целевого пользователя.
+     *
+     * @param string $targetUserToken - токен для аутентификации целевого пользователя (для которого проводим проверку).
+     * @param string $targetUsername  - логин целевого пользователя.
+     *
+     * @return void
+     */
+    public function subscriptionsBalancing(string $targetUserToken, string $targetUsername): void;
 }
