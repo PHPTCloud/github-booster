@@ -25,4 +25,9 @@ class SubscriptionStorage implements SubscriptionStorageInterface
             'targetUsername' => $targetUsername,
         ]);
     }
+
+    public function remove(SubscriptionInterface $subscription, bool $flush = false): void
+    {
+        $this->entityManager->remove($subscription, $flush);
+    }
 }
