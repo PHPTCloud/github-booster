@@ -76,3 +76,13 @@ docker compose exec app php bin/console github:subscriptions:sync \
 --token='<your personal token>' \
 --username='<your user name>'
 ```
+
+### github:subscriptions:balancing
+
+(!) ВАЖНО: метод перед работой очищает таблицу базы данных, чтобы данные всегда были актуальны.
+
+```bash
+docker compose exec app php bin/console github:subscriptions:balancing \
+--token='<your personal token>' \
+--username='<your user name>'
+```
