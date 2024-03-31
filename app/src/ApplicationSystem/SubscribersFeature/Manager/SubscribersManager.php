@@ -158,7 +158,17 @@ class SubscribersManager implements SubscribersManagerInterface
             'line' => __LINE__,
         ]);
 
-        $this->logger->debug('Старт синхронизации подписчиков.', [
+        $this->logger->debug('Удаление списка подписчиков целевого пользователя из БД.', [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->removeAllSubscribersHandler->handle($targetUsername);
+
+        $this->logger->debug('Получение нового списка подписчиков целевого пользователя и сохранение его в БД.', [
+            'arguments' => func_get_args(),
             'class' => __CLASS__,
             'method' => __METHOD__,
             'line' => __LINE__,
