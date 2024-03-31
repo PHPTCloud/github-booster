@@ -60,7 +60,7 @@ docker compose exec app php bin/console github:subscribers:check-unfollowing \
 (!) ВАЖНО: метод перед работой очищает таблицу базы данных, чтобы данные всегда были актуальны.
 
 ```bash
-docker compose exec app php bin/console github:subscriptions:sync \ 
+docker compose exec app php bin/console github:subscribers:sync \ 
 --token='<your personal token>' \
 --username='<your user name>'
 ```
