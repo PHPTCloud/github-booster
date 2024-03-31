@@ -61,4 +61,15 @@ interface SubscribersManagerInterface
      * @return void
      */
     public function removeAllSubscribers(string $targetUsername): void;
+
+    /**
+     * Метод для балансировки подписчиков. Подписывается не тех пользователей, кто подписан на целевого пользователя, но
+     * на которых не подписан целевой пользователь.
+     *
+     * @param string $targetUserToken - токен для аутентификации целевого пользователя (для которого проводим проверку).
+     * @param string $targetUsername  - логин целевого пользователя.
+     *
+     * @return void
+     */
+    public function subscribersBalancing(string $targetUserToken, string $targetUsername): void;
 }

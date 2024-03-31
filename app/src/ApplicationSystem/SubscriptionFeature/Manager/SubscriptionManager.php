@@ -3,21 +3,21 @@ declare(strict_types=1);
 
 namespace App\ApplicationSystem\SubscriptionFeature\Manager;
 
-use App\ApplicationSystem\SubscribersFeature\Interfaces\Manager\SubscribersManagerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\RemoveAllSubscriptionsAction\Interfaces\RemoveAllSubscriptionsHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\SubscriptionsBalancingAction\Interfaces\SubscriptionsBalancingActionHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Actions\SyncSubscriptionsAction\Interfaces\SyncSubscriptionsActionHandlerInterface;
 use App\ApplicationSystem\SubscriptionFeature\Interfaces\Manager\SubscriptionManagerInterface;
+use App\ApplicationSystem\SynchronizationFeature\SynchronizationSubscribersManagerInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
 
 class SubscriptionManager implements SubscriptionManagerInterface
 {
     public function __construct(
         private readonly LoggerInterface $logger,
+        private readonly SynchronizationSubscribersManagerInterface $synchronizationSubscribersManager,
         private readonly SyncSubscriptionsActionHandlerInterface $syncSubscriptionsActionHandler,
         private readonly RemoveAllSubscriptionsHandlerInterface $removeAllSubscriptionsHandler,
         private readonly SubscriptionsBalancingActionHandlerInterface $subscriptionsBalancingActionHandler,
-        private readonly SubscribersManagerInterface $subscribersManager,
     ) {}
 
     public function syncSubscriptions(string $targetUserToken, string $targetUsername): void
@@ -95,7 +95,7 @@ class SubscriptionManager implements SubscriptionManagerInterface
             'line' => __LINE__,
         ]);
 
-        $this->subscribersManager->syncSubscribers($targetUserToken, $targetUsername);
+        $this->synchronizationSubscribersManager->syncSubscribers($targetUserToken, $targetUsername);
 
         $this->logger->debug('Старт балансировки подписок.', [
             'class' => __CLASS__,

@@ -1,10 +1,13 @@
 ARGS=$(filter-out $@, $(MAKECMDGOALS))
 
-init: docker-build docker-up composer-install
+init: create-env docker-build docker-up composer-install
 
-up: docker-up composer-install
+up: create-env docker-up composer-install
 
 build: docker-build
+
+create-env:
+	cp -n .env-sample .env
 
 docker-up:
 	docker compose up -d --remove-orphans

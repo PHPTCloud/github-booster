@@ -6,11 +6,11 @@ namespace App\ApplicationSystem\SubscribersFeature\Manager;
 use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedAction\Interfaces\CheckUnsubscribedActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHookAction\Interfaces\CheckUnsubscribedHandledHookActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\RemoveAllSubscribersAction\Interfaces\RemoveAllSubscribersHandlerInterface;
+use App\ApplicationSystem\SubscribersFeature\Actions\SubscribersBalancingAction\Interfaces\SubscribersBalancingActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\SyncSubscribersAction\Interfaces\SyncSubscribersActionHandlerInterface;
-use App\ApplicationSystem\SubscribersFeature\Actions\SyncSubscriptionsAction\Interfaces\SyncSubscriptionsActionHandlerInterface;
 use App\ApplicationSystem\SubscribersFeature\Actions\UnsubscribeAction\Interfaces\UnsubscribeActionHandlerInterface;
-use App\ApplicationSystem\SubscribersFeature\Enums\ActionsEnum;
 use App\ApplicationSystem\SubscribersFeature\Interfaces\Manager\SubscribersManagerInterface;
+use App\ApplicationSystem\SynchronizationFeature\SynchronizationSubscriptionsManagerInterface;
 use App\DomainSystem\UserFeature\Interfaces\DataObject\UserInterface;
 use App\InfrastructureSystem\LoggerFeature\LoggerInterface;
 
@@ -18,11 +18,13 @@ class SubscribersManager implements SubscribersManagerInterface
 {
     public function __construct(
         private readonly LoggerInterface $logger,
+        private readonly SynchronizationSubscriptionsManagerInterface $synchronizationSubscriptionsManager,
         private readonly CheckUnsubscribedActionHandlerInterface $checkUnsubscribedActionHandler,
         private readonly CheckUnsubscribedHandledHookActionHandlerInterface $checkUnsubscribedHandledHookActionHandler,
         private readonly UnsubscribeActionHandlerInterface $unsubscribeActionHandler,
         private readonly SyncSubscribersActionHandlerInterface $syncSubscribersActionHandler,
         private readonly RemoveAllSubscribersHandlerInterface $removeAllSubscribersHandler,
+        private readonly SubscribersBalancingActionHandlerInterface $subscribersBalancingActionHandler,
     ) {}
 
     /**
@@ -139,6 +141,46 @@ class SubscribersManager implements SubscribersManagerInterface
         ]);
 
         $this->removeAllSubscribersHandler->handle($targetUsername);
+
+        $this->logger->debug(sprintf('%s method ended', __METHOD__), [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+    }
+
+    public function subscribersBalancing(string $targetUserToken, string $targetUsername): void
+    {
+        $this->logger->debug(sprintf('%s method started', __METHOD__), [
+            'arguments' => func_get_args(),
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->logger->debug('Старт синхронизации подписчиков.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->syncSubscribersActionHandler->handle($targetUserToken, $targetUsername);
+
+        $this->logger->debug('Старт синхронизации подписок.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->synchronizationSubscriptionsManager->syncSubscriptions($targetUserToken, $targetUsername);
+
+        $this->logger->debug('Старт балансировки подписчиков.', [
+            'class' => __CLASS__,
+            'method' => __METHOD__,
+            'line' => __LINE__,
+        ]);
+
+        $this->subscribersBalancingActionHandler->handle($targetUserToken, $targetUsername);
 
         $this->logger->debug(sprintf('%s method ended', __METHOD__), [
             'class' => __CLASS__,
