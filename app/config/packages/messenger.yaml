@@ -4,15 +4,8 @@ framework:
         # failure_transport: failed
 
         transports:
-            subscribers.actions.hook:
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-                retry_strategy:
-                    max_retries: 1
-                options:
-                    tube_name: 'subscribers.actions.hook'
 
         routing:
-            App\MessageBusSystem\SubscribersFeature\Interfaces\SubscribersFeatureActionHookMessageInterface: 'subscribers.actions.hook'
 
 # when@test:
 #    framework:
