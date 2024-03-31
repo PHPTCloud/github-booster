@@ -156,4 +156,30 @@ class SubscribersManager implements GithubSubscribersManagerInterface
 
         return $items;
     }
+
+    public function subscribe(string $token, string $username): bool
+    {
+        try {
+            $response = $this->client->put(sprintf('/user/following/%s', $username), [
+                RequestOptions::HEADERS => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]);
+
+            $this->loggingRateLimitHeaders($response->getHeaders());
+        } catch (RequestException $exception) {
+            if ($exception->getResponse()->getStatusCode() === 304) {
+                $this->logger->debug('Вызван метод подписка на пользователя, на которого уже есть подписка.', [
+                    'class' => __CLASS__,
+                    'method' => __METHOD__,
+                    'line' => __LINE__,
+                ]);
+
+                return true;
+            }
+            throw $exception;
+        }
+
+        return $response->getStatusCode() === 204;
+    }
 }

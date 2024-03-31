@@ -23,4 +23,6 @@ interface InternalSubscribersManagerInterface
      * @return SubscriberInterface[]
      */
     public function getSubscribers(string $token, int $page = 1, int $limit = 30): array;
+
+    public function subscribe(string $token, string $username): bool;
 }

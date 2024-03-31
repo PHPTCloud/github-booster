@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace App\InfrastructureSystem\SubscribersFeature\Entity;
 
 use App\DomainSystem\SubscribersFeature\Entity\SubscriberInterface;
+use App\InfrastructureSystem\SubscribersFeature\Repository\SubscriberRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'subscribers')]
-#[ORM\Entity()]
+#[ORM\Entity(repositoryClass: SubscriberRepository::class)]
 class Subscriber implements SubscriberInterface
 {
     #[ORM\Id]
