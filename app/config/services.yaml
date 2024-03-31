@@ -10,6 +10,10 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $githubPersonalAccessToken: "%env(GITHUB_PERSONAL_TOKEN)%"
+            $githubTargetUsername: "%env(GITHUB_TARGET_USERNAME)%"
+            $subscribersBalancingSchedule: "%env(SUBSCRIBERS_BALANCING_SCHEDULE)%"
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -30,10 +34,6 @@ services:
             - { name: kernel.event_listener, event: App\ApplicationSystem\SubscribersFeature\Actions\CheckUnsubscribedHandledHookAction\UnsubscribeAfterCheckDefinedEvent }
 
     # MESSAGE HANDLERS
-    App\MessageBusSystem\SubscribersFeature\CheckUnsubscribedHandledHookAction\MessageHandler:
-        tags:
-            - { name: messenger.message_handler }
-
-    App\MessageBusSystem\SubscribersFeature\UnsubscribeAction\MessageHandler:
+    App\MessageBusSystem\SubscribersFeature\SubscribersBalancingAction\MessageHandler:
         tags:
             - { name: messenger.message_handler }
